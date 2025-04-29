@@ -2,7 +2,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Splitter, SplitterPanel } from "primereact/splitter";
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 
 export default function Form() {
 
@@ -21,8 +21,24 @@ export default function Form() {
         setActivitiesDetail(activitiesDetail.map((detail, i) => index == i ? e.target.value : detail));
     }
 
-    const handle_submit = () => {
-        
+    const handle_submit = async () => {
+        const result = await fetch("http://127.0.0.1:3000/api/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": "d1c0u93ynvr90hiahdw"
+            },
+            body: JSON.stringify({
+                "activities_title": activitiesTitle,
+                "activities_detail": activitiesDetail
+            })
+        });
+
+        if(!result.ok) {
+            alert(`There's something wrong. Status Code: ${result.status}`)
+        }
+
+        alert("Success");
     }
     
     return (
