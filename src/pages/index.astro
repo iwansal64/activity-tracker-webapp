@@ -1,4 +1,8 @@
 ---
+import "../styles/global.css";
+import { PrimeReactProvider } from 'primereact/api';
+import "primereact/resources/themes/lara-dark-indigo/theme.css";
+import Form from "./Form";
 
 ---
 
@@ -11,6 +15,25 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+        <PrimeReactProvider>
+            <Form client:load />
+        </PrimeReactProvider>
 	</body>
 </html>
+
+<style>
+    body {
+        background-color: #111;
+    }
+</style>
+
+<style is:global>
+    ::-webkit-scrollbar {
+        width: 2px;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #fff;
+    }
+</style>
